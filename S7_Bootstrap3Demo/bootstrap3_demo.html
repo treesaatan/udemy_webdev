@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bootstrap3 Basics</title>
+        <!-- <link rel="stylesheet" type="text/css" href="bootstrap.css"> -->
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>Bootstrap Basics</h1>
+        <button class="btn btn-success btn-xs">click pls</button>
+        <a href="https://www.youtube.com/" class="btn btn-info">Youtube</a>
+        
+        <!-- Make a button active -->
+        <button class="btn btn-primary active">have i been clicked?</button>
+        <!-- Make a button disabled -->
+        <button class="btn btn-primary " disabled="disabled">have i been disabled?</button>
+
+        <!-- Big section with words -->
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Bop Song on a Jumbotron!</h1>
+                <p>My heart and flesh may fail
+                    The earth below give way
+                    But with my eyes, with my eyes I'll see the Lord
+                    Lifted high on that day
+                    Behold, the Lamb that was slain
+                    And I'll know every tear was worth it all</p>
+                <a href="https://www.youtube.com/watch?v=qyUPz6_TciY" class="btn btn-success btn-lg">Though You Slay Me</a>
+                
+            </div>
+
+            <!-- Code copied from bootstrap forms -->
+            <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+            <form class="form-inline">
+                <div class="form-group mb-2">
+                  <label for="staticEmail2" class="sr-only">Email</label>
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                  <label for="inputPassword2" class="sr-only">Password</label>
+                  <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+            </form>
+        </div>
+
+    </body>
+</html>  
