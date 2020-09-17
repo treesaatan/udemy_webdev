@@ -86,7 +86,7 @@
                     var maxPoint = new Point(view.size.width, view.size.height);
                     var randomPoint = Point.random();
                     var point = maxPoint*randomPoint; // generate random point in visible area
-                    var newCircle = new Path.Circle(point, 500); // make new circle with random point 500px radious
+                    var newCircle = new Path.Circle(point, 400); // make new circle with random point 500px radious
                     newCircle.fillColor = keyData[event.key].color;
                     keyData[event.key].sound.play();
                     circles.push(newCircle);
@@ -96,8 +96,8 @@
 
             function onFrame(event){
                 for(var i=0; i<circles.length; i++){
-                    circles[i].fillColor.hue += 1;
-                    circles[i].scale(.9); // shrink every frame
+                    circles[i].fillColor.hue += 3;
+                    circles[i].scale(.91); // shrink every frame
                 }
 
             }
