@@ -1,32 +1,110 @@
-<!-- Cannot use ES6 -->
+<!-- paper.js: cannot use ES6 | no let or const-->
+<!-- howler CDN 2.2.0-->
+<!-- patatap.com clone -->
 <!DOCTYPE html>
 <html>
     <head>
         <title>Keyboard</title>
-        <link rel="stylesheet" type="text/css" src="circle.css"/>
-        <script type="text/javscript" src="paper-full.js"></script>
+        <link rel="stylesheet" type="text/css" href="circles.css"/>
+        <script type="text/javascript" src="paper-full.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
         <script type="text/paperscript" canvas="myCanvas">
-             <!-- Create a Paper.js Path to draw a line into it: -->
-            var path = new Path();
 
-            <!-- Give the stroke a color -->
-            path.strokeColor = 'black';
-            var start = new Point(100, 100);
+            var keyData = {
+                <!-- white keys -->
+                s: {
+                    color: "LavenderBlush",
+                    sound: new Howl({ src: ['./sounds/C2.mp3']}),
+                    html5:true
+                },
+                d: {
+                    color: "LightCoral",
+                    sound: new Howl({ src: ['./sounds/D2.mp3']})
 
-            <!-- Move to start and draw a line from there -->
-            path.moveTo(start);
+                },
+                f: {
+                    color: "LightSalmon",
+                    sound: new Howl({ src: ['./sounds/E2.mp3']})
 
-            <!-- Note the plus operator on Point objects. -->
-            <!-- PaperScript does that for us, and much more! -->
-            path.lineTo(start + [ 100, -50 ]);
+                },
+                g: {
+                    color: "LemonChiffon",
+                    sound: new Howl({ src: ['./sounds/F2.mp3']})
 
-            var myCircle = new Path.Circle(new Point(100, 70), 50);
-            myCircle.fillColor = 'black';
+                },
+                h: {
+                    color: "CadetBlue",
+                    sound: new Howl({ src: ['./sounds/G2.mp3']})
+
+                },
+                j: {
+                    color: "teal",
+                    sound: new Howl({ src: ['./sounds/A2.mp3']})
+
+                },
+                k: {
+                    color: "Lavender",
+                    sound: new Howl({ src: ['./sounds/B2.mp3']})
+
+                },
+                l: {
+                    color: "Plum",
+                    sound: new Howl({ src: ['./sounds/C3.mp3']})
+
+                },
+                <!-- black keys -->
+                e: {
+                    color: "LightPink",
+                    sound: new Howl({ src: ['./sounds/Db2.mp3']}),
+                    html5:true
+                },
+                r: {
+                    color: "IndianRed",
+                    sound: new Howl({ src: ['./sounds/Eb2.mp3']}),
+                    html5:true
+                },
+                y: {
+                    color: "DarkSeaGreen",
+                    sound: new Howl({ src: ['./sounds/Gb2.mp3']}),
+                    html5:true
+                },
+                u: {
+                    color: "LightCyan",
+                    sound: new Howl({ src: ['./sounds/Ab2.mp3']}),
+                    html5:true
+                },
+                i: {
+                    color: "Thistle",
+                    sound: new Howl({ src: ['./sounds/Bb2.mp3']}),
+                    html5:true
+                },
+            }
+
+            var circles =[];
+            function onKeyDown(event) {
+                if(keyData[event.key]) {
+                    var maxPoint = new Point(view.size.width, view.size.height);
+                    var randomPoint = Point.random();
+                    var point = maxPoint*randomPoint; // generate random point in visible area
+                    var newCircle = new Path.Circle(point, 500); // make new circle with random point 500px radious
+                    newCircle.fillColor = keyData[event.key].color;
+                    keyData[event.key].sound.play();
+                    circles.push(newCircle);
+                }
+
+            }
+
+            function onFrame(event){
+                for(var i=0; i<circles.length; i++){
+                    circles[i].fillColor.hue += 1;
+                    circles[i].scale(.9); // shrink every frame
+                }
+
+            }
+
         </script>
     </head>
     <body>
-
         <canvas id="myCanvas" resize></canvas>
-
     </body>
 </html>
