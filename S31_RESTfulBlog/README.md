@@ -10,7 +10,7 @@
 * Body Parser - how we get data out of the form
 
 ### make your app.js file and add:
-` let bodyParser = require("body-parser"),
-    mongoose = require("mongoose"),
-    express = require("express"),
-    app = express();'
+    let bodyParser = require("body-parser"),
+        mongoose = require("mongoose"),
+        express = require("express"),
+        app = express();
