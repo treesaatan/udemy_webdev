@@ -12,7 +12,8 @@ app.set("view engine", "ejs");
 // SCHEMA SETUP
 let campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 // turn Schema into a method
@@ -21,7 +22,8 @@ let Campground = mongoose.model("Campground", campgroundSchema);
 // Campground.create(
 //     {
 //         name:"Alapark", 
-//         image:"https://www.alapark.com/sites/default/files/styles/default/public/2019-04/CCC%20Primitive%20camping.jpeg?itok=_6Gwos6W"
+//         image:"https://www.alapark.com/sites/default/files/styles/default/public/2019-04/CCC%20Primitive%20camping.jpeg?itok=_6Gwos6W",
+//         description: "This is a fantastic place to go camping. There are wonderful hiking trails nearby and eye-catching scenery."
 //     }, function(err, campground){
 //         if(err){
 //             console.log(err);
@@ -35,24 +37,26 @@ app.get("/", function(req,res){
     res.render("landing");
 });
 
+// INDEX - show all campgrounds
 app.get("/campgrounds", function(req,res){
     // Get campgrounds from db
     Campground.find({}, function(err,allCampgrounds){
         if(err) {
             console.log(err);
         } else {
-            res.render("campgrounds", {campgrounds:allCampgrounds});
+            res.render("index", {campgrounds:allCampgrounds});
         }
     });
     // res.render("campgrounds", {campgrounds:campgrounds});
 });
 
-// make new campground
+// CREATE - add new campground to db
 app.post("/campgrounds", function(req,res){
     // get data from form --> add to array
     let name = req.body.name;
     let image = req.body.image;
-    let newCampground = {name:name, image:image};
+    let desc = req.body.description;
+    let newCampground = {name:name, image:image, description:desc};
     // create new campground and send to the db
     Campground.create(newCampground, function(err, newlyCreated){
         if(err) {
@@ -64,9 +68,23 @@ app.post("/campgrounds", function(req,res){
     })
 });
 
+// NEW - show form to create new campground
 app.get("/campgrounds/new", function(req,res){
     res.render("new");
 });
+
+// SHOW - shows more info about one campground || :id = anything
+app.get("/campgrounds/:id", function(req,res){
+    // find campground with provided ID
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log(err);
+        }else {
+            // render show template with the campground
+            res.render("show", {campground:foundCampground});
+        }
+    });
+ });
 
 app.listen(3000, function(){
     console.log("yelpcamp started");
